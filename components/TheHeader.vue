@@ -29,7 +29,10 @@
                 subpixel-antialiased
                 underline
               "
-              style="text-decoration-color: rgb(9, 70, 229); text-decoration-thickness: 4px;"
+              style="
+                text-decoration-color: rgb(9, 70, 229);
+                text-decoration-thickness: 4px;
+              "
             >
               Hoenn Blog
             </div>
@@ -142,8 +145,8 @@
 
           <div v-if="$auth.loggedIn" class="flex-shrink-0 relative ml-4">
             <div class="flex flex-row items-center">
-              <button
-                type="button"
+              <nuxt-link
+                to="/profile"
                 class="
                   bg-white
                   rounded-full
@@ -162,7 +165,7 @@
                   src="https://e7.pngegg.com/pngimages/78/788/png-clipart-computer-icons-avatar-business-computer-software-user-avatar-child-face.png"
                   alt=""
                 />
-              </button>
+              </nuxt-link>
               <div class="ml-3 w-30">
                 <div class="text-base font-medium text-gray-800">
                   {{ $auth.user ? $auth.user.username : '' }}
@@ -172,7 +175,6 @@
                 </div>
               </div>
               <button
-                to="/auth/register"
                 class="
                   flex
                   ml-4
@@ -283,14 +285,24 @@
         >
       </div>
       <div class="border-t border-gray-200 pt-4 pb-3">
-        <div class="px-4 flex items-center">
-          <div class="flex-shrink-0">
+        <div v-show="$auth.loggedIn" class="px-4 flex items-center">
+          <nuxt-link
+            to="/profile"
+            class="
+              flex-shrink-0
+              focus:outline-none
+              focus:ring-2
+              focus:ring-offset-2
+              focus:ring-indigo-500
+              rounded-full
+            "
+          >
             <img
               class="h-8 w-8 rounded-full object-cover"
               src="https://e7.pngegg.com/pngimages/78/788/png-clipart-computer-icons-avatar-business-computer-software-user-avatar-child-face.png"
               alt=""
             />
-          </div>
+          </nuxt-link>
           <div class="ml-3">
             <div class="text-base font-medium text-gray-800">
               {{ $auth.user ? $auth.user.username : '' }}
@@ -317,6 +329,80 @@
             <span class="sr-only">View notifications</span>
             <fa-icon icon="bell" />
           </button>
+          <button
+            to="/auth/register"
+            class="
+              flex
+              ml-4
+              justify-center
+              py-2
+              px-2
+              border border-transparent
+              rounded-md
+              shadow-sm
+              text-sm
+              font-medium
+              text-gray-500
+              bg-gray-100
+              hover:bg-gray-200
+              focus:outline-none
+              focus:ring-2
+              focus:ring-offset-2
+              focus:ring-indigo-500
+            "
+            @click="$auth.logout()"
+          >
+            <fa-icon icon="sign-out-alt" />
+          </button>
+        </div>
+        <div v-show="!$auth.loggedIn" class="px-4 flex items-center">
+          <nuxt-link
+            to="/auth/login"
+            class="
+              flex
+              justify-center
+              py-2
+              px-4
+              border border-transparent
+              rounded-md
+              shadow-sm
+              text-sm
+              font-medium
+              text-gray-900
+              bg-gray-100
+              hover:bg-gray-200
+              focus:outline-none
+              focus:ring-2
+              focus:ring-offset-2
+              focus:ring-indigo-500
+            "
+          >
+            Log in
+          </nuxt-link>
+
+          <nuxt-link
+            to="/auth/register"
+            class="
+              flex
+              justify-center
+              py-2
+              px-4
+              border border-transparent
+              rounded-md
+              shadow-sm
+              text-sm
+              font-medium
+              text-white
+              bg-indigo-600
+              hover:bg-indigo-700
+              focus:outline-none
+              focus:ring-2
+              focus:ring-offset-2
+              focus:ring-indigo-500
+            "
+          >
+            Sign up
+          </nuxt-link>
         </div>
       </div>
     </nav>

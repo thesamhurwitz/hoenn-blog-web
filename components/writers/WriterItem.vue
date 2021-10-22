@@ -22,7 +22,7 @@
             <div class="hidden md:block">
               <div>
                 <p class="text-sm text-gray-900">
-                  Joined on
+                  Created at
                   <time :datetime="joinedDate">{{ joinedDate }}</time>
                 </p>
                 <p class="mt-2 flex items-center text-sm text-gray-500">
