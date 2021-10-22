@@ -69,7 +69,7 @@ export const actions = actionTree(
       const writers = await this.$axios.$get('/writers', {
         params: {
           take: 5,
-          skip: state.posts?.length ?? 0,
+          skip: state.writers?.length ?? 0,
         }
       }) as Writer[];
 
