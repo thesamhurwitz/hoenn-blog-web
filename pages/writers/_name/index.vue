@@ -33,7 +33,7 @@
               class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
               icon="calendar"
             />
-            Joined on {{ joinedDate }}
+            Created at {{ joinedDate }}
           </div>
 
           <div class="mt-2 flex items-center text-sm text-gray-500">

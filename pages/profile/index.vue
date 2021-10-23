@@ -6,6 +6,9 @@
       <h1 class="text-xl font-medium text-gray-900 mb-2">Writers</h1>
     </div>
     <writers-list :writers="writers" />
+
+    <writer-item-new @create="$router.push('/writers/new')" />
+
   </div>
 </template>
 
@@ -15,12 +18,14 @@ import { User, Writer } from '~/types/hoenn'
 
 import Profile from '~/components/users/Profile.vue'
 import WriterList from '~/components/writers/WritersList.vue'
+import WriterItemNew from '~/components/writers/WriterItemNew.vue'
 
 @Component({
   middleware: ['auth'],
   components: {
     Profile,
     WriterList,
+    WriterItemNew
   },
 })
 export default class ProfilePage extends Vue {

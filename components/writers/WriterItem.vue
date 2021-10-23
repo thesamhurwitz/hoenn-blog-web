@@ -47,7 +47,7 @@ import moment from 'moment'
 import { Writer } from '~/types/hoenn'
 
 @Component
-export default class HomePage extends Vue {
+export default class WriterItem extends Vue {
   @Prop()
   writer!: Writer
 
