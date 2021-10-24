@@ -1,14 +1,12 @@
 <template>
   <div>
     <div class="px-4 mb-4 mt-2">
-      <h1 class="text-2xl font-medium text-gray-900">
-        New post
-      </h1>
+      <h1 class="text-2xl font-medium text-gray-900">New post</h1>
     </div>
 
-    <ul class="bg-white mb-2 rounded-md">
-      <blog-item :blog="post.blog" />
-    </ul>
+    <div class="my-4 px-4">
+      <blog-item-static :blog="post.blog" />
+    </div>
 
     <edit-post v-model="form" @save="save" />
   </div>
@@ -19,12 +17,12 @@ import { Vue, Component } from 'nuxt-property-decorator'
 import { Blog, Post } from '~/types/hoenn'
 
 import EditPost from '~/components/posts/EditPost.vue'
-import BlogItem from '~/components/blogs/BlogItem.vue'
+import BlogItemStatic from '~/components/blogs/BlogItemStatic.vue'
 
 @Component({
   components: {
     EditPost,
-    BlogItem,
+    BlogItemStatic,
   },
 })
 export default class EditPostPage extends Vue {
@@ -35,7 +33,7 @@ export default class EditPostPage extends Vue {
 
   post = {
     blog: {} as Blog,
-  } as Post;
+  } as Post
 
   async save() {
     try {
@@ -43,7 +41,10 @@ export default class EditPostPage extends Vue {
         ...this.form,
       }
 
-      const patchedPost = await this.$axios.$patch(`/posts/${this.post.id}`, payload) as Post;
+      const patchedPost = (await this.$axios.$patch(
+        `/posts/${this.post.id}`,
+        payload
+      )) as Post
 
       await this.$swal({
         title: 'Saved',
@@ -63,13 +64,15 @@ export default class EditPostPage extends Vue {
   }
 
   async created() {
-    this.post = await this.$axios.$get(`/posts/${this.$route.params.id}`) as Post;
+    this.post = (await this.$axios.$get(
+      `/posts/${this.$route.params.id}`
+    )) as Post
 
     console.log(this.post)
 
     this.form = {
       title: this.post.title,
-      content: this.post.content ?? ''
+      content: this.post.content ?? '',
     }
   }
 }

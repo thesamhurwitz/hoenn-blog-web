@@ -6,9 +6,9 @@
       </h1>
     </div>
 
-    <ul class="bg-white mb-2 rounded-md">
-      <blog-item :blog="blog" />
-    </ul>
+    <div class="my-4 px-4">
+      <blog-item-static :blog="blog" />
+    </div>
 
     <edit-post v-model="form" @save="save" />
   </div>
@@ -19,12 +19,12 @@ import { Vue, Component } from 'nuxt-property-decorator'
 import { Blog, Post } from '~/types/hoenn'
 
 import EditPost from '~/components/posts/EditPost.vue'
-import BlogItem from '~/components/blogs/BlogItem.vue'
+import BlogItemStatic from '~/components/blogs/BlogItemStatic.vue'
 
 @Component({
   components: {
     EditPost,
-    BlogItem,
+    BlogItemStatic,
   },
 })
 export default class NewPostPage extends Vue {
