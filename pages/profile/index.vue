@@ -2,12 +2,16 @@
   <div class="lg:px-4">
     <h1 class="text-3xl mt-2 text-gray-900 font-bold">Profile</h1>
     <profile :user="user" />
-    <div class="divide-y divide-gray-200">
-      <h1 class="text-xl font-medium text-gray-900 mb-2">Blogs</h1>
-    </div>
-    <blogs-list :blogs="blogs" />
 
-    <blog-item-new @create="$router.push('/blogs/new')" />
+    <div v-if="blogs.length > 0 || canCreateBlogs">
+      <div class="divide-y divide-gray-200">
+        <h1 class="text-xl font-medium text-gray-900 mb-2">Blogs</h1>
+      </div>
+      <blogs-list :blogs="blogs" />
+
+      <blog-item-new v-if="canCreateBlogs" @create="$router.push('/blogs/new')" />
+    </div>
+
 
   </div>
 </template>
@@ -34,6 +38,12 @@ export default class ProfilePage extends Vue {
   }
 
   blogs = [] as Blog[]
+  canCreateBlogs = false
+
+  created() {
+    const role = this.$auth.user?.role as string;
+    this.canCreateBlogs = ['ADMIN', 'WRITER'].includes(role)
+  }
 
   async mounted() {
     this.blogs = (await this.$axios.$get(
