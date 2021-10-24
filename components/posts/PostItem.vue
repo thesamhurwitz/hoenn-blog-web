@@ -14,9 +14,9 @@
             <div class="min-w-0 flex-1">
               <p class="text-sm font-medium text-gray-900">
                 <nuxt-link
-                  :to="`/writers/${post.writer.name}`"
+                  :to="`/blogs/${post.blog.name}`"
                   class="hover:underline"
-                  >{{ post.writer.displayName }}</nuxt-link
+                  >{{ post.blog.displayName }}</nuxt-link
                 >
               </p>
               <p class="text-sm text-gray-500">

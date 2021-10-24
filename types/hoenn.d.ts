@@ -4,16 +4,16 @@ export enum UserRole {
   USER = 'USER',
 }
 
-export enum WriterType {
+export enum BlogType {
   PERSONAL = 'PERSONAL',
   ORGANIZATION = 'ORGANIZATION'
 }
 
-export type Writer = {
+export type Blog = {
   id: number;
   name: string;
   displayName: string;
-  type: WriterType,
+  type: BlogType,
   createdAt: string;
   updatedAt: string;
 }
@@ -42,7 +42,7 @@ export type Post = {
   title: string;
   published: boolean;
   content?: string;
-  writer: Writer;
+  blog: Blog;
   categories: Category[];
   createdAt: string;
   updatedAt: string;

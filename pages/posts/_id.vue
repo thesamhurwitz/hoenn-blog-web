@@ -94,10 +94,10 @@
               </div>
               <div class="ml-4">
                 <h3 class="text-lg leading-6 font-medium text-gray-900 hover:underline">
-                  <nuxt-link :to="`/writers/${post ? post.writer.name : ''}`">{{ post ? post.writer.displayName : ''}} </nuxt-link>
+                  <nuxt-link :to="`/blogs/${post ? post.blog.name : ''}`">{{ post ? post.blog.displayName : ''}} </nuxt-link>
                 </h3>
                 <p class="text-sm text-gray-500">
-                  {{ post ? post.writer.type : ''}}
+                  {{ post ? post.blog.type : ''}}
                 </p>
               </div>
             </div>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <edit-writer v-model="form" :edit="true" @save="save" />
+    <edit-blog v-model="form" :edit="true" @save="save" />
     <div class="hidden sm:block" aria-hidden="true">
       <div class="py-5">
         <div class="border-t border-gray-200"></div>
@@ -12,22 +12,22 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import { User, Writer, WriterType } from '~/types/hoenn'
+import { User, Blog, BlogType } from '~/types/hoenn'
 
-import EditWriter from '~/components/writers/EditWriter.vue'
-import MembersList from '~/components/writers/MembersList.vue'
+import EditBlog from '~/components/blogs/EditBlog.vue'
+import MembersList from '~/components/blogs/MembersList.vue'
 
 @Component({
   components: {
-    EditWriter,
+    EditBlog,
     MembersList,
   },
 })
-export default class EditWriterPage extends Vue {
+export default class EditBlogPage extends Vue {
   form = {
     name: '',
     displayName: '',
-    type: 'PERSONAL' as WriterType,
+    type: 'PERSONAL' as BlogType,
     about: '',
   }
 
@@ -35,7 +35,7 @@ export default class EditWriterPage extends Vue {
 
   async save() {
     try {
-      await this.$axios.$patch(`/writers/${this.$route.params.name}`, {
+      await this.$axios.$patch(`/blogs/${this.$route.params.name}`, {
         ...this.form,
       })
 
@@ -56,7 +56,7 @@ export default class EditWriterPage extends Vue {
 
   async addMember(username: string) {
     try {
-      await this.$axios.$put(`/writers/${this.$route.params.name}/editors`, {
+      await this.$axios.$put(`/blogs/${this.$route.params.name}/editors`, {
         username,
       })
 
@@ -74,7 +74,7 @@ export default class EditWriterPage extends Vue {
 
   async deleteMember(username: string) {
     try {
-      await this.$axios.$delete(`/writers/${this.$route.params.name}/editors/${username}`)
+      await this.$axios.$delete(`/blogs/${this.$route.params.name}/editors/${username}`)
 
       await this.loadMembers()
     } catch (e: any) {
@@ -90,18 +90,18 @@ export default class EditWriterPage extends Vue {
 
   async loadMembers() {
     this.members = (await this.$axios.$get(
-      `/writers/${this.$route.params.name}/editors`
+      `/blogs/${this.$route.params.name}/editors`
     )) as User[]
   }
 
   async mounted() {
-    const writer = (await this.$axios.$get(
-      `/writers/${this.$route.params.name}`
-    )) as Writer
+    const blog = (await this.$axios.$get(
+      `/blogs/${this.$route.params.name}`
+    )) as Blog
     this.form = {
-      name: writer.name,
-      displayName: writer.displayName,
-      type: writer.type,
+      name: blog.name,
+      displayName: blog.displayName,
+      type: blog.type,
       about: '',
     }
 

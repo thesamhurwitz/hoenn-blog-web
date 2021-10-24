@@ -7,17 +7,17 @@ import {
 
 import * as user from './user'
 
-import { Post, Writer } from '~/types/hoenn'
+import { Post, Blog } from '~/types/hoenn'
 
 
 export const state = () => ({
   posts: null as Post[] | null,
-  writers: null as Writer[] | null,
+  blogs: null as Blog[] | null,
 })
 
 export const getters = getterTree(state, {
   posts: (state) => state.posts,
-  writers: (state) => state.writers,
+  blogs: (state) => state.blogs,
 })
 
 export const mutations = mutationTree(state, {
@@ -28,12 +28,12 @@ export const mutations = mutationTree(state, {
 
     state.posts.push(...newValue);
   },
-  pushWriters(state, newValue: Writer[]) {
-    if (!state.writers) {
-      state.writers = []
+  pushBlogs(state, newValue: Blog[]) {
+    if (!state.blogs) {
+      state.blogs = []
     }
 
-    state.writers.push(...newValue);
+    state.blogs.push(...newValue);
   }
 })
 
@@ -61,22 +61,22 @@ export const actions = actionTree(
 
       return false;
     },
-    async loadWriters({ commit, state }, { more }: { more: boolean }): Promise<boolean> {
-      if (state.writers && !more) {
+    async loadBlogs({ commit, state }, { more }: { more: boolean }): Promise<boolean> {
+      if (state.blogs && !more) {
         return true;
       }
 
-      const writers = await this.$axios.$get('/writers', {
+      const blogs = await this.$axios.$get('/blogs', {
         params: {
           take: 5,
-          skip: state.writers?.length ?? 0,
+          skip: state.blogs?.length ?? 0,
         }
-      }) as Writer[];
+      }) as Blog[];
 
 
-      commit('pushWriters', writers);
+      commit('pushBlogs', blogs);
 
-      if (writers.length > 0) {
+      if (blogs.length > 0) {
         return true;
       }
 

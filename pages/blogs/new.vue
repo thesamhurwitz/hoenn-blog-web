@@ -1,33 +1,33 @@
 <template>
 <div>
-  <edit-writer v-model="form" @save="save" />
+  <edit-blog v-model="form" @save="save" />
 </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import EditWriter from '~/components/writers/EditWriter.vue'
-import { Writer, WriterType } from '~/types/hoenn'
+import EditBlog from '~/components/blogs/EditBlog.vue'
+import { Blog, BlogType } from '~/types/hoenn'
 
 
 @Component({
   components: {
-    EditWriter
+    EditBlog
   }
 })
-export default class EditWriterPage extends Vue {
+export default class EditBlogPage extends Vue {
   form = {
     name: '',
     displayName: '',
-    type: 'PERSONAL' as WriterType,
+    type: 'PERSONAL' as BlogType,
     about: ''
   }
 
-  members = [] as Writer[]
+  members = [] as Blog[]
 
   async save() {
     try {
-      await this.$axios.$post(`/writers`, {
+      await this.$axios.$post(`/blogs`, {
         ...this.form,
       })
 
@@ -36,7 +36,7 @@ export default class EditWriterPage extends Vue {
         icon: 'success'
       })
 
-      this.$router.push(`/writers/${this.form.name}/edit`)
+      this.$router.push(`/blogs/${this.form.name}/edit`)
     } catch (e: any) {
       if (e.response) {
         this.$swal({

@@ -3,29 +3,29 @@
     <h1 class="text-3xl mt-2 text-gray-900 font-bold">Profile</h1>
     <profile :user="user" />
     <div class="divide-y divide-gray-200">
-      <h1 class="text-xl font-medium text-gray-900 mb-2">Writers</h1>
+      <h1 class="text-xl font-medium text-gray-900 mb-2">Blogs</h1>
     </div>
-    <writers-list :writers="writers" />
+    <blogs-list :blogs="blogs" />
 
-    <writer-item-new @create="$router.push('/writers/new')" />
+    <blog-item-new @create="$router.push('/blogs/new')" />
 
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { User, Writer } from '~/types/hoenn'
+import { User, Blog } from '~/types/hoenn'
 
 import Profile from '~/components/users/Profile.vue'
-import WriterList from '~/components/writers/WritersList.vue'
-import WriterItemNew from '~/components/writers/WriterItemNew.vue'
+import BlogsList from '~/components/blogs/BlogsList.vue'
+import BlogItemNew from '~/components/blogs/BlogItemNew.vue'
 
 @Component({
   middleware: ['auth'],
   components: {
     Profile,
-    WriterList,
-    WriterItemNew
+    BlogsList,
+    BlogItemNew
   },
 })
 export default class ProfilePage extends Vue {
@@ -33,12 +33,12 @@ export default class ProfilePage extends Vue {
     return this.$auth.user as User
   }
 
-  writers = [] as Writer[]
+  blogs = [] as Blog[]
 
   async mounted() {
-    this.writers = (await this.$axios.$get(
-      `/users/${this.user.username}/writers`
-    )) as Writer[]
+    this.blogs = (await this.$axios.$get(
+      `/users/${this.user.username}/blogs`
+    )) as Blog[]
   }
 }
 </script>

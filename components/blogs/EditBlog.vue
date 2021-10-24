@@ -344,15 +344,15 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'nuxt-property-decorator'
-import { WriterType } from '~/types/hoenn'
+import { BlogType } from '~/types/hoenn'
 
 
 @Component
-export default class EditWriterComponent extends Vue {
+export default class EditBlogComponent extends Vue {
   @Prop() value!: {
     name: string
     displayName: string
-    type: WriterType
+    type: BlogType
     about: string
   }
 
@@ -364,7 +364,7 @@ export default class EditWriterComponent extends Vue {
   }
 
   setType(type: string) {
-    this.value.type = type as WriterType
+    this.value.type = type as BlogType
   }
 }
 </script>

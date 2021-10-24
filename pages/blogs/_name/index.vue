@@ -19,7 +19,7 @@
             sm:text-3xl sm:truncate
           "
         >
-          {{ writer ? writer.displayName : '' }}
+          {{ blog ? blog.displayName : '' }}
         </h2>
         <div
           class="
@@ -39,9 +39,9 @@
           <div class="mt-2 flex items-center text-sm text-gray-500">
             <fa-icon
               class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-              :icon="writer && writer.type == 'ORGANIZATION' ? 'building' : 'user-alt'"
+              :icon="blog && blog.type == 'ORGANIZATION' ? 'building' : 'user-alt'"
             />
-            {{ writer ? writer.type : '' }}
+            {{ blog ? blog.type : '' }}
           </div>
         </div>
       </div>
@@ -78,7 +78,7 @@
     </div>
 
     <div class="mt-4">
-      <post-list :posts="writerPosts" />
+      <post-list :posts="blogPosts" />
     </div>
   </div>
 </template>
@@ -89,35 +89,35 @@ import moment from 'moment'
 
 import PostList from '~/components/posts/PostList.vue'
 
-import { Post, Writer } from '~/types/hoenn'
+import { Post, Blog } from '~/types/hoenn'
 
 @Component({
   components: {
     PostList,
   },
 })
-export default class WriterPage extends Vue {
-  writer: Writer | null = null
-  writerPosts = [] as Post[]
+export default class BlogPage extends Vue {
+  blog: Blog | null = null
+  blogPosts = [] as Post[]
 
   get joinedDate() {
-    if (!this.writer) {
+    if (!this.blog) {
       return ''
     }
-    return moment(this.writer.createdAt).format('MMMM D YYYY')
+    return moment(this.blog.createdAt).format('MMMM D YYYY')
   }
 
   async mounted() {
-    this.writer = (await this.$axios.$get(
-      `writers/${this.$route.params.name}`
-    )) as Writer
+    this.blog = (await this.$axios.$get(
+      `blogs/${this.$route.params.name}`
+    )) as Blog
 
-    this.writerPosts = (await this.$axios.$get(
-      `/writers/${this.writer.name}/posts`
+    this.blogPosts = (await this.$axios.$get(
+      `/blogs/${this.blog.name}/posts`
     )) as Post[]
 
-    this.writerPosts.forEach((p) => {
-      p.writer = this.writer as Writer;
+    this.blogPosts.forEach((p) => {
+      p.blog = this.blog as Blog;
     })
   }
 }

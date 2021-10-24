@@ -72,7 +72,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { Writer } from '~/types/hoenn'
+import { Blog } from '~/types/hoenn'
 
 import UsersList from '~/components/users/UsersList.vue'
 
@@ -82,7 +82,7 @@ import UsersList from '~/components/users/UsersList.vue'
   },
 })
 export default class MembersListComponent extends Vue {
-  @Prop() members!: Writer[]
+  @Prop() members!: Blog[]
 
   username = ''
 }

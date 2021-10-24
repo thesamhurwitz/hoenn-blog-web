@@ -16,7 +16,7 @@
       <div>
         <fa-icon icon="plus" size="lg" />
       </div>
-      <div>Create new writer</div>
+      <div>Create new blog</div>
     </div>
   </div>
 </template>
@@ -25,5 +25,5 @@
 import { Vue, Component } from 'nuxt-property-decorator'
 
 @Component
-export default class WriterItemNew extends Vue {}
+export default class BlogItemNew extends Vue {}
 </script>

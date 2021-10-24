@@ -1,6 +1,6 @@
 <template>
   <li>
-    <nuxt-link :to="`/writers/${writer.name}`" class="block hover:bg-gray-50">
+    <nuxt-link :to="`/blogs/${blog.name}`" class="block hover:bg-gray-50">
       <div class="flex items-center px-4 py-4 sm:px-6">
         <div class="min-w-0 flex-1 flex items-center">
           <div class="flex-shrink-0">
@@ -13,10 +13,10 @@
           <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
             <div>
               <p class="text-sm font-medium text-indigo-600 truncate">
-                {{ writer.displayName }}
+                {{ blog.displayName }}
               </p>
               <p class="mt-2 flex items-center text-sm text-gray-500">
-                <span class="truncate">{{ writer.type }}</span>
+                <span class="truncate">{{ blog.type }}</span>
               </p>
             </div>
             <div class="hidden md:block">
@@ -44,15 +44,15 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import moment from 'moment'
-import { Writer } from '~/types/hoenn'
+import { Blog } from '~/types/hoenn'
 
 @Component
-export default class WriterItem extends Vue {
+export default class BlogItem extends Vue {
   @Prop()
-  writer!: Writer
+  blog!: Blog
 
   get joinedDate() {
-    return moment(this.writer.createdAt).format('MMMM D YYYY')
+    return moment(this.blog.createdAt).format('MMMM D YYYY')
   }
 }
 </script>
