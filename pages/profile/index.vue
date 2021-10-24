@@ -1,7 +1,7 @@
 <template>
   <div class="lg:px-4">
     <h1 class="text-3xl mt-2 text-gray-900 font-bold">Profile</h1>
-    <profile :user="user" />
+    <profile :user="user" :edit="true" @edit="$router.push('/profile/edit')" />
 
     <div v-if="blogs.length > 0 || canCreateBlogs">
       <div class="divide-y divide-gray-200">
@@ -9,10 +9,11 @@
       </div>
       <blogs-list :blogs="blogs" />
 
-      <blog-item-new v-if="canCreateBlogs" @create="$router.push('/blogs/new')" />
+      <blog-item-new
+        v-if="canCreateBlogs"
+        @create="$router.push('/blogs/new')"
+      />
     </div>
-
-
   </div>
 </template>
 
@@ -29,7 +30,7 @@ import BlogItemNew from '~/components/blogs/BlogItemNew.vue'
   components: {
     Profile,
     BlogsList,
-    BlogItemNew
+    BlogItemNew,
   },
 })
 export default class ProfilePage extends Vue {
@@ -41,7 +42,7 @@ export default class ProfilePage extends Vue {
   canCreateBlogs = false
 
   created() {
-    const role = this.$auth.user?.role as string;
+    const role = this.$auth.user?.role as string
     this.canCreateBlogs = ['ADMIN', 'WRITER'].includes(role)
   }
 

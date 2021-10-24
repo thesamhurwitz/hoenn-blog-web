@@ -58,6 +58,35 @@
         </div>
         Log out
       </nuxt-link> -->
+
+      <button
+        v-if="edit"
+        type="button"
+        class="
+          ml-2
+          inline-flex
+          items-center
+          px-4
+          py-2
+          border border-gray-300
+          shadow-sm
+          text-sm
+          font-medium
+          rounded-md
+          text-gray-700
+          hover:bg-gray-200
+          focus:outline-none
+          focus:ring-2
+          focus:ring-offset-2
+          focus:ring-indigo-500
+        "
+        @click="$emit('edit')"
+      >
+        <div class="-ml-1 mr-2 h-5 w-5 text-gray-400">
+          <fa-icon icon="pen" />
+        </div>
+        <span>Edit</span>
+      </button>
     </div>
 
     <div
@@ -105,6 +134,7 @@ import { User } from '~/types/hoenn'
 @Component
 export default class ProfileComponent extends Vue {
   @Prop() user!: User
+  @Prop() edit = false
 
   get joinedDate() {
     return moment(this.user.createdAt).format('MMMM D YYYY [at] hh:mm A')
