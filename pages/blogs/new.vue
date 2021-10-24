@@ -15,7 +15,7 @@ import { Blog, BlogType } from '~/types/hoenn'
     EditBlog
   }
 })
-export default class EditBlogPage extends Vue {
+export default class NewBlogPage extends Vue {
   form = {
     name: '',
     displayName: '',
